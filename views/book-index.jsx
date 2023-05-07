@@ -46,17 +46,4 @@ export function BookIndex() {
                 {selectedBook && <BookDetails onBack={()=>setSelectedBook(null)} book={selectedBook} />}
         </section>
     )
-
-
-    // * OLD VERSION
-    // return (
-    //     <section className="car-index">
-    //         {!selectedCar && <React.Fragment>
-    //             <CarFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-    //             <CarList onSelectCar={onSelectCar} cars={cars} onRemoveCar={onRemoveCar} />
-    //         </React.Fragment>}
-
-    //         {selectedCar && <CarDetails onBack={()=>setSelectedCar(null)} car={selectedCar} />}
-    //     </section>
-    // )
 }

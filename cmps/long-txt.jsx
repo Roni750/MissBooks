@@ -1,6 +1,13 @@
+const { useState } = React
+
 export function LongTxt({bookDescription, length = 100}) {
-    console.log("length:", length)
     const shortenedDescription = bookDescription.substr(0, length)
-    console.log("description:", bookDescription)
-    console.log("Shortened:", shortenedDescription)
+    const [displayFull, setDisplayFull] = useState(false)
+    const description = displayFull ? bookDescription : shortenedDescription
+
+    return (
+        <React.Fragment>
+            <p>{description}{!displayFull && bookDescription.length > length && <span className="pointer-mouse" onClick={() => setDisplayFull(true)}>...</span>}</p>
+        </React.Fragment>
+    )
 }

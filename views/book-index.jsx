@@ -1,55 +1,54 @@
-// import { CarFilter } from "../cmps/car-filter.jsx"
+import { BookFilter } from "../cmps/book-filter.jsx"
 import { BookList } from "../cmps/book-list.jsx"
+import { BookDetails } from "./book-details.jsx"
 import { bookService } from "../services/book.service.js"
-// import { CarDetails } from "./car-details.jsx"
 
 const { useEffect, useState } = React
 
 export function BookIndex() {
 
     const [books, setBooks] = useState([])
-    // const [selectedCar, setSelectedCar] = useState(null)
-    // const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
-
-    console.log("books:", books)
+    const [selectedBook, setSelectedBook] = useState(null)
+    const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
 
     useEffect(() => {
         loadBooks()
-    }, [])
+    }, [filterBy])
 
     function loadBooks() {
-        bookService.query().then(books => setBooks(books))
-        // bookService.query(filterBy).then(cars => setCars(cars))
-        // carService.query().then(setCars)
+        bookService.query(filterBy).then(books => setBooks(books))
+        // bookService.query().then(books => setBooks(books))
     }
 
-    // function onRemoveCar(carId) {
-    //     bookService.remove(carId).then(() => {
-    //         const updatedCars = cars.filter(car => car.id !== carId)
-    //         setCars(updatedCars)
-    //     })
-    // }
+    function onRemoveBook(bookId) {
+        bookService.remove(bookId).then(() => {
+            const updatedBooks = books.filter(book => book.id !== bookId)
+            setBooks(updatedBooks)
+        })
+    }
 
-    // function onSetFilter(filterBy) {
-    //     setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
-    // }
+    function onSetFilter(filterBy) {
+        setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
+    }
 
-    // function onSelectCar(car){
-    //     setSelectedCar(car)
-    // }
+    function onSelectBook(book){
+        console.log("book:", book)
+        setSelectedBook(book)
+    }
 
     console.log('render');
     return (
         <section className="car-index">
-            {/* {!selectedCar && <React.Fragment> */}
-                {/* <CarFilter onSetFilter={onSetFilter} filterBy={filterBy} /> */}
-                {/* <CarList onSelectCar={onSelectCar} cars={cars} onRemoveCar={onRemoveCar} /> */}
-                <BookList books={books}/>
-            {/* </React.Fragment>} */}
-
-            {/* {selectedCar && <CarDetails onBack={()=>setSelectedCar(null)} car={selectedCar} />} */}
+            {!selectedBook && <React.Fragment>
+                <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+                <BookList books={books} onSelectBook={onSelectBook} onRemoveBook={onRemoveBook}/>
+            </React.Fragment>}
+                {selectedBook && <BookDetails onBack={()=>setSelectedBook(null)} book={selectedBook} />}
         </section>
     )
+
+
+    // * OLD VERSION
     // return (
     //     <section className="car-index">
     //         {!selectedCar && <React.Fragment>

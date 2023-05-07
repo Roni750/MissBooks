@@ -4,7 +4,7 @@ export function BookDetails({ book, onBack }) {
     const currentYear = new Date().getFullYear()
     const estimatedPublishStatus = currentYear - book.publishedDate > 10 ? 'Vintage' : 'New'
     return (
-        <section className="car-details">
+        <section className="book-details">
             <h1>Book Name: {book.title}</h1>
             <h5>Price: {book.listPrice.amount}</h5>
             <img src={book.thumbnail} alt={book.title}/>

@@ -1,0 +1,8 @@
+.book-filter {
+    background-color: var(--clr2bg);
+}
+
+.book-filter form {
+    display: grid;
+    grid-template-columns: 200px 200px;
+}

@@ -5,7 +5,6 @@ const { useState, useEffect } = React
 export function BookFilter({ filterBy, onSetFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
-
     useEffect(() => {
         onSetFilter(filterByToEdit)
     }, [filterByToEdit])
@@ -21,20 +20,9 @@ export function BookFilter({ filterBy, onSetFilter }) {
         onSetFilter(filterByToEdit)
     }
 
-    // ! DRY!. WE WILL NEVER REPEAT OUR SELVES
-    // function handleTxtChange({ target }) {
-    //     const value = target.value
-    //     setFilterByToEdit((prevFilterBy) => ({ ...prevFilterBy, txt: value }))
-    // }
-
-    // function handleMinSpeedChange({ target }) {
-    //     const value = target.value
-    //     setFilterByToEdit((prevFilterBy) => ({ ...prevFilterBy, minSpeed: value }))
-    // }
-
     const { txt, maxPrice, publishDate } = filterByToEdit
     return (
-        <section className="car-filter">
+        <section className="book-filter">
             <h2>Filter Our Books</h2>
 
             <form onSubmit={onSubmitFilter}>

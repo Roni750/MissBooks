@@ -1,6 +1,3 @@
-import { LongTxt } from "./long-txt.jsx"
-import { BookDetails } from "./book-details.jsx"
-
 export function BookPreview({ book }) {
     const bookPriceClass = book.listPrice.amount > 150 ? 'high-price-tag' : 'low-price-tag'
     return (

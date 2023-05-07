@@ -31,6 +31,10 @@ function query(filterBy = {}) {
             if (filterBy.maxPrice) {
                 books = books.filter(book => book.listPrice.amount <= filterBy.maxPrice)
             }
+
+            if (filterBy.publishDate) {
+                books = books.filter(book => book.publishedDate < filterBy.publishDate)
+            }
             return books
         })
 }
@@ -64,7 +68,7 @@ function getEmptyBook(title = 'book', amount = utilService.getRandomIntInclusive
 }
 
 function getDefaultFilter() {
-    return { txt: '', maxPrice: '' }
+    return { txt: '', maxPrice: '', publishDate: '' }
 }
 
 function _createBooks() {

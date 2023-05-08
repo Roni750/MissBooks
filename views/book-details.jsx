@@ -27,7 +27,6 @@ export function BookDetails() {
         navigate('/book')
     }
 
-
     function getEstPublishStatus() {
         const currentYear = new Date().getFullYear()
         if ((currentYear - book.publishedDate) > 10) return 'Vintage'

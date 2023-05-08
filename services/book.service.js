@@ -48,15 +48,23 @@ function save(book) {
     }
 }
 
-function getEmptyBook(title = 'book', amount = utilService.getRandomIntInclusive(0, 150)) {
+function getEmptyBook() {
     return {
-        id: utilService.makeId(),
-        title,
+        title: '',
+        subtitle: utilService.makeLorem(20),
+        authors: utilService.makeLorem(10),
+        publishedDate: utilService.getRandomIntInclusive(1950, 2023),
         listPrice: {
-            amount,
+            amount: utilService.getRandomIntInclusive(27, 198),
             currencyCode: "EUR",
-            isOnSale: false
-        }
+            isOnSale: (utilService.getRandomIntInclusive(0, 1) === 0) ? false : true
+        },
+        description: utilService.makeLorem(100),
+        pageCount: utilService.getRandomIntInclusive(180, 890),
+        categories: [
+            "Computers",
+            "Hack"
+        ]
     }
 }
 

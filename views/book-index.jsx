@@ -1,9 +1,12 @@
+const { useEffect, useState } = React
+const { Link } = ReactRouterDOM
+
 import { BookFilter } from "../cmps/book-filter.jsx"
 import { BookList } from "../cmps/book-list.jsx"
 import { BookDetails } from "./book-details.jsx"
 import { bookService } from "../services/book.service.js"
+import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 
-const { useEffect, useState } = React
 
 export function BookIndex() {
 
@@ -13,6 +16,7 @@ export function BookIndex() {
 
     useEffect(() => {
         loadBooks()
+        showSuccessMsg('Welcome to car index!')
     }, [filterBy])
 
     function loadBooks() {
@@ -39,14 +43,8 @@ export function BookIndex() {
     return (
         <section className="car-index">
                 <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+                <Link to="/book/edit">Add Book</Link>
                 <BookList books={books} onRemoveBook={onRemoveBook}/>
         </section>
     )
 }
-        // <section className="car-index">
-        //     {!selectedBook && <React.Fragment>
-        //         <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-        //         <BookList books={books} onSelectBook={onSelectBook} onRemoveBook={onRemoveBook}/>
-        //     </React.Fragment>}
-        //         {selectedBook && <BookDetails onBack={()=>setSelectedBook(null)} book={selectedBook} />}
-        // </section>

@@ -1,18 +1,37 @@
 .book-details {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
+
 .book-details h1 {
     color: var(--clr1);
     font-size: 2em;
-    
 }
+
 .book-details h5 {
     color: var(--clr2);
 }
+
+.book-details .price {
+    font-size: 2em;
+}
+
 .book-details img {
     max-width: 200px;
     display: block;
     margin: auto;
+}
+
+.tags-container {
+    gap: 1em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
+.tag {
+    /* color: lightgray; */
+    background-color: lightgray;
+    border: dashed 2px lightslategray;
+    padding: .3em;
 }

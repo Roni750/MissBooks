@@ -72,6 +72,7 @@ function getEmptyBook() {
 
 function getEmptyReview() {
     return {
+        id: utilService.makeId(),
         fullName: "",
         rating: "",
         readAt: "",
@@ -84,10 +85,12 @@ function addReview(bookId, review) {
             if (!book.reviews || book.reviews.length < 1) {
                 book.reviews = []
                 book.reviews[0] = review
-                save(book)
+                // save(book)
+                storageService.put(DB_KEY, book)
             } else {
                 book.reviews.push(review)
-                save(book)
+                // save(book)
+                storageService.put(DB_KEY, book)
             }
             book.reviews
         })

@@ -5,7 +5,6 @@ import { bookService } from "../services/book.service.js"
 
 export function AddReview({ bookId }) {
     const [reviewToEdit, setReviewToEdit] = useState(bookService.getEmptyReview())
-    console.log("reviewToEdit:", reviewToEdit)
 
     function onSaveReview(ev) {
         ev.preventDefault()
@@ -14,7 +13,6 @@ export function AddReview({ bookId }) {
 
     function handleChange({ target }) {
         const field = target.name
-        console.log("target.type:", target.type)
         const value = target.type === 'select-one' ? (+target.value || '') : target.value
         setReviewToEdit(prevReview => ({ ...prevReview, [field]: value }))
     }
@@ -22,8 +20,8 @@ export function AddReview({ bookId }) {
     return (
         <section className="review-edit">
             <form onSubmit={onSaveReview} >
-                <label htmlFor="fullname">Full name:</label>
-                <input onChange={handleChange} type="text" name="fullname" id="fullname" />
+                <label htmlFor="fullName">Full name:</label>
+                <input onChange={handleChange} type="text" name="fullName" id="fullName" />
                 <br />
                 <label htmlFor="rating">Rate:</label>
                 <select onChange={handleChange} name="rating" id="rating">

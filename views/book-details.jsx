@@ -2,6 +2,7 @@ const { useEffect, useState } = React
 const { useParams, useNavigate } = ReactRouterDOM
 
 import { LongTxt } from "../cmps/long-txt.jsx"
+import { ReviewList } from "../cmps/review-list.jsx"
 import { bookService } from "../services/book.service.js"
 import { AddReview } from "./add-review.jsx"
 
@@ -59,6 +60,7 @@ export function BookDetails() {
             <LongTxt bookDescription={book.description} length={90} />
             <AddReview bookId={book.id}/><h2>Add Review</h2>
             <button onClick={onBack}>Back</button>
+            <ReviewList book={book}/>
         </section>
     )
 }

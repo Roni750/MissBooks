@@ -16,7 +16,7 @@ export function BookIndex() {
 
     useEffect(() => {
         loadBooks()
-        showSuccessMsg('Welcome to car index!')
+        // showSuccessMsg('Welcome to car index!')
     }, [filterBy])
 
     function loadBooks() {

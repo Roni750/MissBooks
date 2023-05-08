@@ -21,12 +21,20 @@ function createEventEmitter() {
 export const eventBusService = createEventEmitter()
 
 
+
+////////////////////////////////////////////////////
+
+
+
 export function showUserMsg(msg) {
     eventBusService.emit('show-user-msg', msg)
 }
+
 export function showSuccessMsg(txt) {
+    console.log("func called", txt)
     showUserMsg({ txt, type: 'success' })
 }
+
 export function showErrorMsg(txt) {
     showUserMsg({ txt, type: 'error' })
 }
@@ -37,16 +45,21 @@ export function showErrorMsg(txt) {
 
 // Service Testing:
 // Example for using the service
+eventBusService.on('some-event', (data) => {
+    // console.log('Got some-event:', data)
+})
+
 const unsubscribe = eventBusService.on('some-event', (data) => {
-    console.log('Got some-event:', data)
+    // console.log('Me Too!', data)
 })
 
 eventBusService.emit('some-event', { num: 100 })
+
 // Just as example - unsubscribe after 2 secs
 // setTimeout(() => {
 //     unsubscribe()
 // }, 2000)
-setTimeout(() => eventBusService.emit('some-event', 100), 3000)
+// setTimeout(() => eventBusService.emit('some-event', { num: 999 }), 3000)
 
 
 

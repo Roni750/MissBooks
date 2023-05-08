@@ -2,8 +2,7 @@ const { useEffect, useState } = React
 const { useParams, useNavigate } = ReactRouterDOM
 
 import { bookService } from "../services/book.service.js"
-import { showErrorMsg } from "../services/event-bus.service.js"
-import { showSuccessMsg } from "../services/event-bus.service.js"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 export function BookEdit() {
     const [bookToEdit, setBookToEdit] = useState(bookService.getEmptyBook())

@@ -1,7 +1,6 @@
 import { eventBusService } from "../services/event-bus.service.js"
 
 const { useState, useEffect } = React
-eventBusService
 
 export function UserMsg() {
     const [msg, setMsg] = useState(null)

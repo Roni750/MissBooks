@@ -3,12 +3,12 @@ const { useParams, useNavigate } = ReactRouterDOM
 
 import { LongTxt } from "../cmps/long-txt.jsx"
 import { bookService } from "../services/book.service.js"
+import { AddReview } from "./add-review.jsx"
 
 export function BookDetails() {
     const [book, setBook] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
-    console.log("params:", params)
 
     useEffect(() => {
         loadBook()
@@ -57,6 +57,7 @@ export function BookDetails() {
                 {(getEstPublishStatus() && <h5 className="tag">{getEstPublishStatus()}</h5>)}
             </div>
             <LongTxt bookDescription={book.description} length={90} />
+            <AddReview bookId={book.id}/><h2>Add Review</h2>
             <button onClick={onBack}>Back</button>
         </section>
     )

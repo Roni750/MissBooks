@@ -11,6 +11,8 @@ export const bookService = {
     save,
     getEmptyBook,
     getDefaultFilter,
+    getEmptyReview,
+    addReview,
 }
 
 function query(filterBy = {}) {
@@ -66,6 +68,29 @@ function getEmptyBook() {
             "Hack"
         ]
     }
+}
+
+function getEmptyReview() {
+    return {
+        fullName: "",
+        rating: "",
+        readAt: "",
+    }
+}
+
+function addReview(bookId, review) {
+    get(bookId)
+        .then(book => {
+            if (!book.reviews || book.reviews.length < 1) {
+                book.reviews = []
+                book.reviews[0] = review
+                save(book)
+            } else {
+                book.reviews.push(review)
+                save(book)
+            }
+            book.reviews
+        })
 }
 
 function getDefaultFilter() {

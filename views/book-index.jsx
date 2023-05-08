@@ -17,7 +17,6 @@ export function BookIndex() {
 
     function loadBooks() {
         bookService.query(filterBy).then(books => setBooks(books))
-        // bookService.query().then(books => setBooks(books))
     }
 
     function onRemoveBook(bookId) {
@@ -31,19 +30,23 @@ export function BookIndex() {
         setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
     }
 
-    function onSelectBook(book){
-        console.log("book:", book)
-        setSelectedBook(book)
-    }
+    // function onSelectBook(book){
+    //     console.log("book:", book)
+    //     setSelectedBook(book)
+    // }
 
     console.log('render');
     return (
         <section className="car-index">
-            {!selectedBook && <React.Fragment>
                 <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-                <BookList books={books} onSelectBook={onSelectBook} onRemoveBook={onRemoveBook}/>
-            </React.Fragment>}
-                {selectedBook && <BookDetails onBack={()=>setSelectedBook(null)} book={selectedBook} />}
+                <BookList books={books} onRemoveBook={onRemoveBook}/>
         </section>
     )
 }
+        // <section className="car-index">
+        //     {!selectedBook && <React.Fragment>
+        //         <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+        //         <BookList books={books} onSelectBook={onSelectBook} onRemoveBook={onRemoveBook}/>
+        //     </React.Fragment>}
+        //         {selectedBook && <BookDetails onBack={()=>setSelectedBook(null)} book={selectedBook} />}
+        // </section>

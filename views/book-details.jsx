@@ -1,19 +1,63 @@
-import { LongTxt } from "../cmps/long-txt.jsx"
+const { useEffect, useState } = React
+const { useParams, useNavigate } = ReactRouterDOM
 
-export function BookDetails({ book, onBack }) {
-    const currentYear = new Date().getFullYear()
-    const estimatedPublishStatus = currentYear - book.publishedDate > 10 ? 'Vintage' : 'New'
+import { LongTxt } from "../cmps/long-txt.jsx"
+import { bookService } from "../services/book.service.js"
+
+export function BookDetails() {
+    const [book, setBook] = useState(null)
+    const params = useParams()
+    const navigate = useNavigate()
+    console.log("params:", params)
+
+    useEffect(() => {
+        loadBook()
+    }, [])
+    
+    function loadBook() {
+        bookService.get(params.bookId)
+            .then(setBook)
+            .catch(err => {
+                console.log('Had issues in book details:', err);
+                navigate('/book')
+            })
+    }
+
+    function onBack() {
+        navigate('/book')
+    }
+
+
+    function getEstPublishStatus() {
+        const currentYear = new Date().getFullYear()
+        if ((currentYear - book.publishedDate) > 10) return 'Vintage'
+        else if ((currentYear - book.publishedDate) === 1) return 'New'
+        else return ''
+    }
+
+    function getEstReadingLvl() {
+        if (book.pageCount > 500) return <h5 className="tag">Serious Reading</h5>
+        else if (book.pageCount > 200) return <h5 className="tag">Descent Reading</h5>
+        else if (book.pageCount < 200) return <h5 className="tag">Light Reading</h5>
+    }
+
+    function isOnSale() {
+        if(book.listPrice.isOnSale) return <h5 className="tag">On Sale</h5>
+        else return
+    }
+
+    if (!book) return <div><p>No car found</p></div>
     return (
         <section className="book-details">
             <h1>Book Name: {book.title}</h1>
-            <h5 class="price">Price: {book.listPrice.amount}</h5>
-            <img src={book.thumbnail} alt={book.title}/>
+            <h5 className="price">Price: {book.listPrice.amount}</h5>
+            <img src={book.thumbnail} alt={book.title} />
             <div className="tags-container flex flex-row">
-            {(book.listPrice.isOnSale) ? <h5 class="tag">On Sale</h5> : ''}
-            <div class="tag">{book.pageCount > 500 && <h5>Serious Reading</h5> || book.pageCount > 200 && <h5>Descent Reading</h5> || book.pageCount < 200 && <h5>Light Reading</h5>}</div>
-            {<h5 class="tag">{estimatedPublishStatus}</h5>}</div>
-            <LongTxt bookDescription={book.description} length={90}/>
-            {/* <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga, velit reiciendis sed optio eum saepe! Aliquid necessitatibus atque est quasi unde odit voluptate! Vero, dolor sunt molestiae possimus labore suscipit?</p> */}
+                {isOnSale()}
+                {getEstReadingLvl()}
+                {(getEstPublishStatus() && <h5 className="tag">{getEstPublishStatus()}</h5>)}
+            </div>
+            <LongTxt bookDescription={book.description} length={90} />
             <button onClick={onBack}>Back</button>
         </section>
     )

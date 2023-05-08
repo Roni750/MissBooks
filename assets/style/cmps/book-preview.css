@@ -7,13 +7,17 @@
     text-transform: capitalize;
 }
 
-.book-preview h4{
+.book-preview h4 {
     text-transform: capitalize;
     color: black;
 }
 
 .book-preview img {
     max-width: 100px;
+}
+
+.on-sale-sign {
+    margin-block-start: 1em;
 }
 
 .book-preview .low-price-tag {
